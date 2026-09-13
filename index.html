@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Simple Website</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --bg-alt: #1e293b;
+    --accent: #38bdf8;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    background: var(--bg-alt);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+    color: var(--accent);
+  }
+
+  nav a {
+    color: var(--text);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--accent); }
+
+  .hero {
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .hero h2 {
+    font-size: 2.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    color: var(--text-dim);
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #0f172a;
+    padding: 0.75rem 1.75rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+  }
+
+  section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  section h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .card {
+    background: var(--bg-alt);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #334155;
+  }
+
+  .card h4 { color: var(--text); margin-bottom: 0.5rem; }
+  .card p { color: var(--text-dim); font-size: 0.95rem; }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin-top: 1.5rem;
+  }
+
+  input, textarea {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: var(--bg-alt);
+    color: var(--text);
+    font-family: inherit;
+  }
+
+  button[type="submit"] {
+    background: var(--accent);
+    color: #0f172a;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  #form-status {
+    margin-top: 0.75rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-dim);
+    border-top: 1px solid #334155;
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>MySite</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>Welcome to My Simple Website</h2>
+  <p>A clean, single-page site built with plain HTML, CSS, and a bit of JavaScript.</p>
+  <a href="#contact" class="btn">Get in Touch</a>
+</div>
+
+<section id="about">
+  <h3>About</h3>
+  <p>This is a minimal starter website. Edit this text in <code>index.html</code> to make it your own — swap the copy, colors, and sections to fit your project.</p>
+</section>
+
+<section id="features">
+  <h3>Features</h3>
+  <div class="cards">
+    <div class="card">
+      <h4>Fast</h4>
+      <p>No frameworks, no build step — just open the file in a browser.</p>
+    </div>
+    <div class="card">
+      <h4>Responsive</h4>
+      <p>Layout adapts cleanly to mobile, tablet, and desktop screens.</p>
+    </div>
+    <div class="card">
+      <h4>Easy to Extend</h4>
+      <p>Add new sections or pages by copying the existing HTML structure.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h3>Contact</h3>
+  <form id="contact-form">
+    <input type="text" id="name" placeholder="Your name" required>
+    <input type="email" id="email" placeholder="Your email" required>
+    <textarea id="message" rows="4" placeholder="Your message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <p id="form-status"></p>
+</section>
+
+<footer>
+  &copy; <span id="year"></span> MySite. All rights reserved.
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('form-status').textContent =
+      'Thanks! This is a demo form — hook it up to a backend to actually send messages.';
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
