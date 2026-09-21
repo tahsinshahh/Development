@@ -3,183 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Simple Website</title>
+<title>Your Name — Software Engineer</title>
+<meta name="description" content="Personal site of Your Name, software engineer.">
+
+<!--
+  HOW TO EDIT
+  Everything you need to change is plain text in the <body> below:
+  name, tagline, the experience list, the projects list, and your links.
+  To use a real portrait, replace the <svg> inside .portrait with:
+    <img src="portrait.jpg" alt="Portrait of Your Name">
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
   :root {
-    --bg: #0f172a;
-    --bg-alt: #1e293b;
-    --accent: #38bdf8;
-    --text: #e2e8f0;
-    --text-dim: #94a3b8;
+    --bg: #ece9e3;
+    --paper: #f4f2ed;
+    --ink: #1f1e1c;
+    --muted: #7a766e;
+    --line: #c9c4b9;
+    --accent: #b5432d;
+    --font: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1917;
+      --paper: #22211e;
+      --ink: #ebe7df;
+      --muted: #8f8a80;
+      --line: #3b3934;
+      --accent: #e0664d;
+    }
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
     background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .hero {
-    text-align: center;
-    padding: 6rem 2rem;
-  }
+  ::selection { background: var(--accent); color: var(--bg); }
 
-  .hero h2 {
-    font-size: 2.75rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero p {
-    color: var(--text-dim);
-    max-width: 500px;
-    margin: 0 auto 2rem;
-  }
-
-  .btn {
-    display: inline-block;
-    background: var(--accent);
-    color: #0f172a;
-    padding: 0.75rem 1.75rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
-  }
-
-  section {
-    max-width: 900px;
+  /* ---------- layout ---------- */
+  .page {
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 3rem 2rem;
-  }
-
-  section h3 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    color: var(--accent);
-  }
-
-  .cards {
+    padding-block: clamp(3rem, 9vh, 7rem);
+    padding-inline: clamp(1.25rem, 5vw, 6.5rem);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .side {
+    position: sticky;
+    top: clamp(2rem, 8vh, 5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 860px) {
+    .page { grid-template-columns: minmax(0, 1fr); }
+    .side { position: static; max-width: 26rem; }
+  }
+
+  /* ---------- intro ---------- */
+  h1 {
+    font-size: clamp(2rem, 4.5vw, 2.9rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .role {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 1.15rem;
+  }
+
+  .role .dot { color: var(--accent); }
+
+  .lede {
+    margin-top: clamp(2rem, 6vh, 3.5rem);
+    max-width: 28rem;
+  }
+
+  /* ---------- sections ---------- */
+  section { margin-top: clamp(2.5rem, 7vh, 4.5rem); }
+
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 1.1rem;
+  }
+
+  ul { list-style: none; }
+
+  li { margin-bottom: 0.35rem; }
+
+  li .what { color: var(--muted); }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(var(--line), var(--line));
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    transition: color 0.2s, background-size 0.2s, background-image 0.2s;
+  }
+
+  a:hover, a:focus-visible {
+    color: var(--accent);
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 100% 2px;
+    outline: none;
+  }
+
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+  /* ---------- portrait ---------- */
+  .portrait {
+    aspect-ratio: 1 / 0.75;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .portrait svg, .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ---------- links card ---------- */
+  .find h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .find h2::before {
+    content: "";
+    width: 1.1rem;
+    height: 1.1rem;
+    border: 1px dashed var(--muted);
+    transform: rotate(45deg);
+    background:
+      radial-gradient(circle, var(--ink) 0 22%, transparent 24%);
   }
 
   .card {
-    background: var(--bg-alt);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid #334155;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 1.25rem 1.5rem;
   }
 
-  .card h4 { color: var(--text); margin-bottom: 0.5rem; }
-  .card p { color: var(--text-dim); font-size: 0.95rem; }
-
-  form {
+  .card li {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
-    max-width: 400px;
-    margin-top: 1.5rem;
+    padding: 0.35rem 0;
+    margin: 0;
+    font-size: 0.95rem;
+    border-bottom: 1px dashed var(--line);
   }
 
-  input, textarea {
-    padding: 0.75rem;
-    border-radius: 8px;
-    border: 1px solid #334155;
-    background: var(--bg-alt);
-    color: var(--text);
-    font-family: inherit;
-  }
-
-  button[type="submit"] {
-    background: var(--accent);
-    color: #0f172a;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  #form-status {
-    margin-top: 0.75rem;
-    color: var(--accent);
-    font-size: 0.9rem;
-  }
+  .card li:last-child { border-bottom: none; }
+  .card .label { color: var(--muted); }
 
   footer {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-dim);
-    border-top: 1px solid #334155;
-    margin-top: 2rem;
+    margin-top: clamp(3rem, 8vh, 5rem);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  /* ---------- entrance ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: rise 0.7s ease forwards;
+    }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.25s; }
+    .d4 { animation-delay: 0.35s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
   }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <h2>Welcome to My Simple Website</h2>
-  <p>A clean, single-page site built with plain HTML, CSS, and a bit of JavaScript.</p>
-  <a href="#contact" class="btn">Get in Touch</a>
+<div class="page">
+
+  <main>
+    <header class="reveal">
+      <h1>Your Name</h1>
+      <p class="role">Software engineer · Your City<span class="dot">.</span></p>
+    </header>
+
+    <p class="lede reveal d1">
+      I build considered software — the kind that stops feeling like software.
+    </p>
+
+    <section id="experience" class="reveal d2">
+      <h2>experience</h2>
+      <ul>
+        <li><a href="#">Company One</a> <span class="what">— What you built or did there, 2025–2026</span></li>
+        <li><a href="#">Company Two</a> <span class="what">— What you built or did there, 2024–2025</span></li>
+      </ul>
+    </section>
+
+    <section id="projects" class="reveal d3">
+      <h2>projects</h2>
+      <ul>
+        <li><a href="#">Project One</a> <span class="what">— One line on what it does, 2026</span></li>
+        <li><a href="#">Project Two</a> <span class="what">— One line on what it does, 2025–2026</span></li>
+        <li><a href="#">Project Three</a> <span class="what">— One line on what it does, 2025</span></li>
+        <li><a href="#">Project Four</a> <span class="what">— One line on what it does, 2024</span></li>
+      </ul>
+    </section>
+
+    <section id="contact" class="reveal d4">
+      <h2>contact</h2>
+      <p>Want to work together, or just say hi? <a href="mailto:you@example.com">you@example.com</a></p>
+    </section>
+
+    <footer>&copy; <span id="year"></span> Your Name</footer>
+  </main>
+
+  <aside class="side reveal d2">
+    <div class="portrait" role="img" aria-label="Portrait placeholder">
+      <!-- Replace this <svg> with <img src="portrait.jpg" alt="Portrait of Your Name"> -->
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink)">
+        <!-- head -->
+        <path d="M160 108c2 30 18 52 40 52s38-22 40-52"/>
+        <!-- hair -->
+        <path d="M158 108c-8-44 18-68 48-66 30 2 44 26 36 66-6-18-14-30-30-34-16 4-34 6-54 34z" stroke-width="1.5"/>
+        <path d="M176 60c10-6 22-8 34-6M170 74c14-8 30-10 46-6" stroke-width="1" opacity=".55"/>
+        <!-- face -->
+        <path d="M184 112h.01M216 112h.01" stroke-width="5"/>
+        <path d="M188 134c8 7 16 7 24 0" stroke-width="1.6"/>
+        <!-- shoulders -->
+        <path d="M110 300c2-52 34-88 90-88s88 36 90 88"/>
+        <!-- laptop -->
+        <path d="M262 214l52-8 14 68-60 8z" stroke-width="1.6"/>
+        <path d="M270 226l38-6" stroke-width="1" opacity=".5"/>
+        <!-- shading hatch -->
+        <g stroke-width=".8" opacity=".35">
+          <path d="M132 262l30-42M144 268l32-44M156 274l32-46M238 236l24 30M248 232l22 28"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="find">
+      <h2>find me</h2>
+      <div class="card">
+        <ul>
+          <li><span class="label">GitHub</span> <a href="https://github.com/tahsinshahh" target="_blank" rel="noopener">github.com/tahsinshahh</a></li>
+          <li><span class="label">Email</span> <a href="mailto:you@example.com">you@example.com</a></li>
+          <li><span class="label">LinkedIn</span> <a href="#" target="_blank" rel="noopener">your-profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
 </div>
-
-<section id="about">
-  <h3>About</h3>
-  <p>This is a minimal starter website. Edit this text in <code>index.html</code> to make it your own — swap the copy, colors, and sections to fit your project.</p>
-</section>
-
-<section id="features">
-  <h3>Features</h3>
-  <div class="cards">
-    <div class="card">
-      <h4>Fast</h4>
-      <p>No frameworks, no build step — just open the file in a browser.</p>
-    </div>
-    <div class="card">
-      <h4>Responsive</h4>
-      <p>Layout adapts cleanly to mobile, tablet, and desktop screens.</p>
-    </div>
-    <div class="card">
-      <h4>Easy to Extend</h4>
-      <p>Add new sections or pages by copying the existing HTML structure.</p>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <h3>Contact</h3>
-  <form id="contact-form">
-    <input type="text" id="name" placeholder="Your name" required>
-    <input type="email" id="email" placeholder="Your email" required>
-    <textarea id="message" rows="4" placeholder="Your message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-  <p id="form-status"></p>
-</section>
-
-<footer>
-  &copy; <span id="year"></span> MySite. All rights reserved.
-</footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  document.getElementById('contact-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    document.getElementById('form-status').textContent =
-      'Thanks! This is a demo form — hook it up to a backend to actually send messages.';
-    this.reset();
-  });
 </script>
 
 </body>
