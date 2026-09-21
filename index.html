@@ -3,40 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Name — Software Engineer</title>
-<meta name="description" content="Personal site of Your Name, software engineer.">
+<title>Your Name — Dhaka</title>
+<meta name="description" content="Personal site of Your Name — student and builder, based in Dhaka.">
 
 <!--
   HOW TO EDIT
-  Everything you need to change is plain text in the <body> below:
-  name, tagline, the experience list, the projects list, and your links.
+  Everything you change is plain text in the <body> below:
+  your name, the tagline, the education / projects / activities lists, and your links.
   To use a real portrait, replace the <svg> inside .portrait with:
     <img src="portrait.jpg" alt="Portrait of Your Name">
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bg: #ece9e3;
-    --paper: #f4f2ed;
-    --ink: #1f1e1c;
-    --muted: #7a766e;
-    --line: #c9c4b9;
-    --accent: #b5432d;
+    --bg: #eaeff7;
+    --paper: #f6f9fd;
+    --ink: #101d33;
+    --muted: #5a6e8f;
+    --line: #c4d2e6;
+    --accent: #2f5fd0;
+    --accent-2: #2aa0c4;
+    --glow-a: rgba(64, 124, 232, 0.20);
+    --glow-b: rgba(42, 160, 196, 0.16);
+    --shadow: rgba(24, 52, 104, 0.10);
     --font: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a1917;
-      --paper: #22211e;
-      --ink: #ebe7df;
-      --muted: #8f8a80;
-      --line: #3b3934;
-      --accent: #e0664d;
+      --bg: #0a1322;
+      --paper: #101d31;
+      --ink: #dce7f8;
+      --muted: #8399ba;
+      --line: #22314c;
+      --accent: #6aa3ff;
+      --accent-2: #4fd0e8;
+      --glow-a: rgba(58, 118, 226, 0.22);
+      --glow-b: rgba(40, 170, 205, 0.14);
+      --shadow: rgba(0, 0, 0, 0.45);
     }
   }
 
@@ -51,9 +59,37 @@
     font-size: 1.05rem;
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow-x: hidden;
   }
 
-  ::selection { background: var(--accent); color: var(--bg); }
+  /* layered atmosphere: two soft blue glows + a faint grid */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(60rem 40rem at 82% -8%, var(--glow-a), transparent 65%),
+      radial-gradient(48rem 38rem at -10% 100%, var(--glow-b), transparent 62%);
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 3.5rem 3.5rem;
+    mask-image: radial-gradient(70% 60% at 50% 30%, #000 0%, transparent 78%);
+    -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, #000 0%, transparent 78%);
+  }
+
+  ::selection { background: var(--accent); color: var(--paper); }
 
   /* ---------- layout ---------- */
   .page {
@@ -72,7 +108,7 @@
     top: clamp(2rem, 8vh, 5rem);
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 2.25rem;
   }
 
   @media (max-width: 860px) {
@@ -81,39 +117,92 @@
   }
 
   /* ---------- intro ---------- */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border-radius: 999px;
+    padding: 0.15rem 0.85rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .status::before {
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--accent-2);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 70%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .status::before { animation: pulse 2.4s ease-out infinite; }
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 0.5rem transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
+    }
+  }
+
   h1 {
-    font-size: clamp(2rem, 4.5vw, 2.9rem);
-    font-weight: 500;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 4.6vw, 3rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    background: linear-gradient(105deg, var(--ink) 30%, var(--accent) 120%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   .role {
-    margin-top: 0.75rem;
+    margin-top: 0.7rem;
     color: var(--muted);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
-  .role .dot { color: var(--accent); }
+  .role .dot { color: var(--accent-2); }
 
   .lede {
-    margin-top: clamp(2rem, 6vh, 3.5rem);
-    max-width: 28rem;
+    margin-top: clamp(2rem, 6vh, 3.25rem);
+    max-width: 30rem;
+    font-size: 1.1rem;
+  }
+
+  .lede em {
+    font-style: normal;
+    color: var(--accent);
   }
 
   /* ---------- sections ---------- */
-  section { margin-top: clamp(2.5rem, 7vh, 4.5rem); }
+  section { margin-top: clamp(2.5rem, 7vh, 4rem); }
 
   h2 {
-    font-size: 1.05rem;
-    font-weight: 400;
+    font-size: 0.95rem;
+    font-weight: 500;
     color: var(--muted);
-    margin-bottom: 1.1rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--line), transparent);
   }
 
   ul { list-style: none; }
 
-  li { margin-bottom: 0.35rem; }
+  li { margin-bottom: 0.5rem; }
 
   li .what { color: var(--muted); }
 
@@ -130,21 +219,34 @@
 
   a:hover, a:focus-visible {
     color: var(--accent);
-    background-image: linear-gradient(var(--accent), var(--accent));
+    background-image: linear-gradient(90deg, var(--accent), var(--accent-2));
     background-size: 100% 2px;
-    outline: none;
   }
 
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
   /* ---------- portrait ---------- */
   .portrait {
-    aspect-ratio: 1 / 0.75;
-    border: 1.5px solid var(--ink);
-    background: var(--paper);
+    position: relative;
+    aspect-ratio: 1 / 0.78;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background:
+      radial-gradient(90% 80% at 70% 10%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%),
+      var(--paper);
+    box-shadow: 0 1.5rem 3rem -1.5rem var(--shadow);
     display: grid;
     place-items: center;
     overflow: hidden;
+  }
+
+  .portrait::after {
+    content: "";
+    position: absolute;
+    inset: 0.4rem;
+    border: 1px dashed color-mix(in srgb, var(--accent) 22%, transparent);
+    border-radius: 2px;
+    pointer-events: none;
   }
 
   .portrait svg, .portrait img {
@@ -155,36 +257,35 @@
   }
 
   /* ---------- links card ---------- */
-  .find h2 {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
   .find h2::before {
     content: "";
-    width: 1.1rem;
-    height: 1.1rem;
-    border: 1px dashed var(--muted);
+    width: 1rem;
+    height: 1rem;
+    border: 1px dashed var(--accent);
     transform: rotate(45deg);
-    background:
-      radial-gradient(circle, var(--ink) 0 22%, transparent 24%);
+    background: radial-gradient(circle, var(--accent-2) 0 24%, transparent 26%);
+    flex: none;
   }
 
   .card {
-    background: var(--paper);
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
     border: 1px solid var(--line);
-    padding: 1.25rem 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 1rem 2.5rem -1.75rem var(--shadow);
+    padding: 1.1rem 1.4rem;
+    backdrop-filter: blur(6px);
   }
 
   .card li {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 0.35rem 0;
+    gap: 0.2rem 1rem;
+    padding: 0.4rem 0;
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     border-bottom: 1px dashed var(--line);
+    overflow-wrap: anywhere;
   }
 
   .card li:last-child { border-bottom: none; }
@@ -193,21 +294,35 @@
   footer {
     margin-top: clamp(3rem, 8vh, 5rem);
     color: var(--muted);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 
   /* ---------- entrance ---------- */
   @media (prefers-reduced-motion: no-preference) {
     .reveal {
       opacity: 0;
-      transform: translateY(10px);
-      animation: rise 0.7s ease forwards;
+      transform: translateY(12px);
+      animation: rise 0.75s cubic-bezier(.2,.7,.3,1) forwards;
     }
-    .d1 { animation-delay: 0.05s; }
-    .d2 { animation-delay: 0.15s; }
-    .d3 { animation-delay: 0.25s; }
-    .d4 { animation-delay: 0.35s; }
+    .d1 { animation-delay: 0.06s; }
+    .d2 { animation-delay: 0.16s; }
+    .d3 { animation-delay: 0.26s; }
+    .d4 { animation-delay: 0.36s; }
+    .d5 { animation-delay: 0.46s; }
     @keyframes rise { to { opacity: 1; transform: none; } }
+  }
+
+  /* monospace runs wide — step everything down on phones.
+     Kept last in the sheet so these win on source order. */
+  @media (max-width: 620px) {
+    body { font-size: 0.88rem; line-height: 1.75; }
+    h1 { font-size: clamp(1.55rem, 8.5vw, 2.2rem); }
+    .role { font-size: 0.9rem; }
+    .lede { font-size: 0.95rem; }
+    .status { font-size: 0.66rem; padding: 0.1rem 0.7rem; margin-bottom: 1.1rem; }
+    h2 { font-size: 0.82rem; }
+    .card { padding: 0.9rem 1.1rem; }
+    .card li { font-size: 0.78rem; }
   }
 </style>
 </head>
@@ -217,19 +332,22 @@
 
   <main>
     <header class="reveal">
+      <p class="status">Applying · Fall 2027</p>
       <h1>Your Name</h1>
-      <p class="role">Software engineer · Your City<span class="dot">.</span></p>
+      <p class="role">Prospective university student · Dhaka<span class="dot">.</span></p>
     </header>
 
     <p class="lede reveal d1">
-      I build considered software — the kind that stops feeling like software.
+      I'm finishing school in Dhaka and spending most of my free hours
+      <em>building small things that work</em> — then taking them apart to
+      find out why.
     </p>
 
-    <section id="experience" class="reveal d2">
-      <h2>experience</h2>
+    <section id="education" class="reveal d2">
+      <h2>education</h2>
       <ul>
-        <li><a href="#">Company One</a> <span class="what">— What you built or did there, 2025–2026</span></li>
-        <li><a href="#">Company Two</a> <span class="what">— What you built or did there, 2024–2025</span></li>
+        <li><a href="#">Your School or College</a> <span class="what">— Science, 2023–2026</span></li>
+        <li><a href="#">Exam or Qualification</a> <span class="what">— Your result, 2026</span></li>
       </ul>
     </section>
 
@@ -243,12 +361,30 @@
       </ul>
     </section>
 
-    <section id="contact" class="reveal d4">
-      <h2>contact</h2>
-      <p>Want to work together, or just say hi? <a href="mailto:you@example.com">you@example.com</a></p>
+    <section id="activities" class="reveal d4">
+      <h2>activities</h2>
+      <ul>
+        <li><a href="#">Club or Society</a> <span class="what">— Your role there, 2025–2026</span></li>
+        <li><a href="#">Olympiad or Contest</a> <span class="what">— How far you got, 2025</span></li>
+        <li><a href="#">Volunteer Work</a> <span class="what">— What you did, 2024–2025</span></li>
+      </ul>
     </section>
 
-    <footer>&copy; <span id="year"></span> Your Name</footer>
+    <section id="reading" class="reveal d4">
+      <h2>currently</h2>
+      <ul>
+        <li><span class="what">Learning —</span> what you're teaching yourself right now</li>
+        <li><span class="what">Reading —</span> the book on your desk</li>
+        <li><span class="what">Building —</span> whatever is half-finished this month</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="reveal d5">
+      <h2>contact</h2>
+      <p>Admissions officer, collaborator, or just curious? <a href="mailto:you@example.com">you@example.com</a></p>
+    </section>
+
+    <footer>&copy; <span id="year"></span> Your Name · Dhaka, Bangladesh</footer>
   </main>
 
   <aside class="side reveal d2">
@@ -266,8 +402,8 @@
         <!-- shoulders -->
         <path d="M110 300c2-52 34-88 90-88s88 36 90 88"/>
         <!-- laptop -->
-        <path d="M262 214l52-8 14 68-60 8z" stroke-width="1.6"/>
-        <path d="M270 226l38-6" stroke-width="1" opacity=".5"/>
+        <path d="M262 214l52-8 14 68-60 8z" stroke-width="1.6" style="stroke: var(--accent)"/>
+        <path d="M270 226l38-6" stroke-width="1" opacity=".5" style="stroke: var(--accent)"/>
         <!-- shading hatch -->
         <g stroke-width=".8" opacity=".35">
           <path d="M132 262l30-42M144 268l32-44M156 274l32-46M238 236l24 30M248 232l22 28"/>
